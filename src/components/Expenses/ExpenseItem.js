@@ -16,13 +16,16 @@ const ExpenseItem = (props) => {
 
 
     return (
-        <Card className={classes.expenseItem}>
-            <Calendar title={props.title} date={props.date} amount={props.amount}></Calendar>
-            <div className={classes.description}>
-                <h2>{title}</h2>
-                <div className={classes.price}>${props.amount}</div>
-            </div>
-        </Card>
+        <li>
+            <Card className={classes.expenseItem}>
+                <Calendar title={props.title} date={props.date} amount={props.amount}></Calendar>
+                <div className={classes.description}>
+                    <h2>{title}</h2>
+                    <div className={classes.price}>${props.amount}</div>
+                </div>
+            </Card>
+        </li>
+
     );
 }
 
