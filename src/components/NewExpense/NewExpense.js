@@ -1,5 +1,6 @@
 import classes from './NewExpense.module.scss';
 import ExpenseForm from "./ExpenseForm";
+import {useState} from "react";
 
 const NewExpense = (props) => {
 
@@ -11,9 +12,22 @@ const NewExpense = (props) => {
 
         props.onAddExpense(expenseData);
     }
+
+    const [showForm, setShowForm] = useState(false);
+
+    const toggleFormHandler = () => {
+        setShowForm((prevState) => {
+            return !prevState;
+        });
+    }
+
     return (
         <div className={classes.newExpense}>
-            <ExpenseForm onNewExpense={newExpenseHandler}/>
+            {showForm === false ?
+                <button onClick={toggleFormHandler}>Add New Expense</button>
+                : <ExpenseForm onNewExpense={newExpenseHandler} onCancelClick={toggleFormHandler}/>
+            }
+
         </div>
     );
 }
