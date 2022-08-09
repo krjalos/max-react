@@ -2,47 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="740b88f4-8175-4e0b-95d3-9cbb31c2c6fd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/CourseGoals/CourseGoalItem/CourseGoalItem.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/CourseGoals/CourseGoalItem/CourseGoalItem.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/CourseGoals/CourseGoalList/CourseGoalList.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/CourseGoals/CourseGoalList/CourseGoalList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/CourseGoals/CourseInput/CourseInput.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/CourseGoals/CourseInput/CourseInput.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UI/Button/Button.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UI/Button/Button.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config.codekit3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/max-react.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Chart/Chart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Chart/Chart.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Chart/ChartBar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Chart/ChartBar.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Expenses/Calendar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Expenses/Calendar.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Expenses/ExpenseItem.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Expenses/ExpenseItem.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Expenses/Expenses.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Expenses/Expenses.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Expenses/ExpensesChart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Expenses/ExpensesFilter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Expenses/ExpensesFilter.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Expenses/ExpensesList.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Expenses/ExpensesList.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NewExpense/ExpenseForm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NewExpense/ExpenseForm.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NewExpense/NewExpense.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NewExpense/NewExpense.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UI/Card.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UI/Card.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CourseGoals/CourseInput/CourseInput.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseGoals/CourseInput/CourseInput.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CourseGoals/CourseInput/CourseInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseGoals/CourseInput/CourseInput.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/UI/Button/Button.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Button/Button.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/UI/Button/Button.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Button/Button.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +58,7 @@
       <option name="presentableId" value="Default" />
       <updated>1659364099583</updated>
       <workItem from="1659364100745" duration="14109000" />
-      <workItem from="1659612792564" duration="28954000" />
+      <workItem from="1659612792564" duration="32273000" />
     </task>
     <servers />
   </component>
