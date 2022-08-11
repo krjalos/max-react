@@ -1,0 +1,9 @@
+.userListItem {
+    display:block;
+    width:100%;
+    height:30px;
+    line-height:30px;
+    padding:0 10px;
+    margin:5px 0;
+    border:1px solid #ccc;
+}
