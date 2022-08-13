@@ -1,15 +1,18 @@
 .button {
-    background:purple;
-    padding:0 10px;
-    display:inline-block;
-    color:#fff;
-    margin:10px 0;
-    border:0;
-    height:30px;
-    line-height:30px;
+  font: inherit;
+  border: 1px solid #4f005f;
+  background: #4f005f;
+  color: white;
+  padding: 0.25rem 1rem;
+  cursor: pointer;
 }
 
-.button:hover {
-    cursor:pointer;
-    background:rebeccapurple;
+.button:hover,
+.button:active {
+  background: #741188;
+  border-color: #741188;
+}
+
+.button:focus {
+  outline: none;
 }
