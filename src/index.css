@@ -1,16 +1,15 @@
-* {
-  box-sizing: border-box;
-}
-
 html {
-  font-family: sans-serif;
-  background: #fff;
+  background:#333;
 }
 
 body {
   margin: 0;
+  padding:0;
+  font-size:14px;
+
+  box-sizing: border-box;
 }
 
-main {
-  margin-top: 6rem;
+* {
+  box-sizing: inherit;
 }

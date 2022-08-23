@@ -1,0 +1,20 @@
+.controls {
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.controls button {
+    height:30px;
+    font-weight:400;
+}
+
+.controls button + button {
+    margin-left:20px;
+}
+
+.controls .whiteButton {
+    border:1px solid darkred;
+    background:#fff;
+    color:darkred;
+}

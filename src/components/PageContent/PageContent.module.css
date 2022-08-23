@@ -1,0 +1,10 @@
+.pageContent {
+    width:100%;
+    max-width:640px;
+    background-color: #383838;
+    margin:-150px auto 0;
+    position:relative;
+    z-index:10;
+    text-align:center;
+    color:#fff;
+}

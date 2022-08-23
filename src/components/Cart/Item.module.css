@@ -1,0 +1,25 @@
+.item {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.priceAmount {
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.price {
+    color:#8a2b06;
+    min-width:60px;
+}
+
+.amount {
+    display:block;
+    padding:0 10px;
+    height:20px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    font:700 12px/20px Arial, sans-serif;
+}
