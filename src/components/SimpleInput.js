@@ -5,14 +5,27 @@ const SimpleInput = (props) => {
 
   const [submitHappened, setSubmitHappened] = useState(false);
 
-  const {inputValue: nameValue, inputIsValid: nameInputValid, showError: nameShowError, resetInput: resetName, changeHandler: nameChangeHandler, blurHandler: nameBlurHandler} = useInput((value) => {
+  const {
+    inputValue: nameValue,
+    inputIsValid: nameInputValid,
+    inputTouched: nameTouched,
+    resetInput: resetName,
+    changeHandler: nameChangeHandler,
+    blurHandler: nameBlurHandler
+  } = useInput((value) => {
     return value.trim() !== "";
   }, submitHappened);
 
-  const {inputValue: emailValue, inputIsValid: emailInputValid, showError: emailShowError, resetInput: resetEmail, changeHandler: emailChangeHandler, blurHandler: emailBlurHandler} = useInput((value) => {
+  const {
+    inputValue: emailValue,
+    inputIsValid: emailInputValid,
+    inputTouched: emailTouched,
+    resetInput: resetEmail,
+    changeHandler: emailChangeHandler,
+    blurHandler: emailBlurHandler
+  } = useInput((value) => {
     return value.trim() !== '' && value.includes("@") && value.includes('.');
   }, submitHappened);
-
 
   const formIsValid = nameInputValid && emailInputValid;
 
@@ -22,19 +35,21 @@ const SimpleInput = (props) => {
     setSubmitHappened(true);
 
     if (!formIsValid) {
+      console.log(`Fail`);
       return false;
     }
+
+    console.log(`submit`);
 
     setSubmitHappened(false);
     resetName();
     resetEmail();
-
-    console.log(`State = ${nameValue}`);
   }
 
   return (
+
     <form onSubmit={formSubmitHandler}>
-      <div className={`form-control ${nameShowError && 'invalid'}`}>
+      <div className={`form-control ${!nameInputValid && (submitHappened || nameTouched) && 'invalid'}`}>
         <label htmlFor='name'>Your Name</label>
         <input onBlur={nameBlurHandler}
                type='text'
@@ -42,9 +57,9 @@ const SimpleInput = (props) => {
                value={nameValue}
                onChange={nameChangeHandler}
         />
-        {nameShowError && <p className='error-text'>Input is invalid</p>}
+        {!nameInputValid && (submitHappened || nameTouched) && <p className='error-text'>Input is invalid</p>}
       </div>
-      <div className={`form-control ${emailShowError && 'invalid'}`}>
+      <div className={`form-control ${!emailInputValid && (submitHappened || emailTouched) && 'invalid'}`}>
         <label htmlFor='email'>Email</label>
         <input onBlur={emailBlurHandler}
                type='text'
@@ -52,7 +67,7 @@ const SimpleInput = (props) => {
                value={emailValue}
                onChange={emailChangeHandler}
         />
-        {emailShowError && <p className='error-text'>Email is invalid</p>}
+        {!emailInputValid && (submitHappened || emailTouched) && <p className='error-text'>Email is invalid</p>}
       </div>
       <div className="form-actions">
         <button>Submit</button>
