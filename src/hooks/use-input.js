@@ -1,6 +1,7 @@
 import {useState} from "react";
+import classes from "../components/Cart/OrderForm.module.css";
 
-const useInput = (validateFunction) => {
+const useInput = (validateFunction, inputData) => {
 
   const [inputValue, setInputValue] = useState('');
   const [inputTouched, setInputTouched] = useState(false);
@@ -20,13 +21,25 @@ const useInput = (validateFunction) => {
     setInputTouched(false);
   }
 
+  const inputCode = () => {
+
+    return (
+      <div key={inputData.id} className={classes.inputWrapper}>
+        <label htmlFor={inputData.id}>{inputData.name}</label>
+        <input value={inputValue} onChange={changeHandler} onBlur={blurHandler} type="text" id={inputData.id}/>
+        {inputTouched && !inputIsValid && <p className={classes.errorText}>{inputData.name} {inputData.error}</p>}
+      </div>
+    );
+  }
+
   return {
-    inputValue,
-    inputIsValid,
-    inputTouched,
-    resetInput,
-    changeHandler,
-    blurHandler
+    inputObject : {
+      inputIsValid,
+      inputCode,
+      resetInput,
+      id: inputData.id,
+      inputValue
+    }
   };
 }
 
