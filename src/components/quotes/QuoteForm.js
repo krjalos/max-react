@@ -1,14 +1,18 @@
-import { useRef } from 'react';
+import {useRef, useState} from 'react';
 
-import Card from '../ui/Card';
-import LoadingSpinner from '../ui/LoadingSpinner';
+import Card from "../UI/Card";
+import LoadingSpinner from "../UI/LoadingSpinner";
 import classes from './QuoteForm.module.css';
+import {Prompt} from "react-router-dom";
 
 const QuoteForm = (props) => {
   const authorInputRef = useRef();
   const textInputRef = useRef();
 
+  const [interacted, setInteracted] = useState(false);
+
   function submitFormHandler(event) {
+    console.log("form");
     event.preventDefault();
 
     const enteredAuthor = authorInputRef.current.value;
@@ -19,28 +23,43 @@ const QuoteForm = (props) => {
     props.onAddQuote({ author: enteredAuthor, text: enteredText });
   }
 
-  return (
-    <Card>
-      <form className={classes.form} onSubmit={submitFormHandler}>
-        {props.isLoading && (
-          <div className={classes.loading}>
-            <LoadingSpinner />
-          </div>
-        )}
+  const submitClickHandler = () => {
+    console.log("button");
+    setInteracted(false);
+  }
 
-        <div className={classes.control}>
-          <label htmlFor='author'>Author</label>
-          <input type='text' id='author' ref={authorInputRef} />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor='text'>Text</label>
-          <textarea id='text' rows='5' ref={textInputRef}></textarea>
-        </div>
-        <div className={classes.actions}>
-          <button className='btn'>Add Quote</button>
-        </div>
-      </form>
-    </Card>
+  const formFocusHandler = () => {
+    setInteracted(true);
+  }
+  console.log(interacted);
+  return (
+    <>
+      <Prompt when={interacted} message={(location) => {
+        return `Are you sure you want to leave for ${location.pathname}?`;
+      }}/>
+
+      <Card>
+        <form onFocus={formFocusHandler} className={classes.form} onSubmit={submitFormHandler}>
+          {props.isLoading && (
+            <div className={classes.loading}>
+              <LoadingSpinner />
+            </div>
+          )}
+
+          <div className={classes.control}>
+            <label htmlFor='author'>Author</label>
+            <input type='text' id='author' ref={authorInputRef} />
+          </div>
+          <div className={classes.control}>
+            <label htmlFor='text'>Text</label>
+            <textarea id='text' rows='5' ref={textInputRef}></textarea>
+          </div>
+          <div className={classes.actions}>
+            <button onClick={submitClickHandler} className='btn'>Add Quote</button>
+          </div>
+        </form>
+      </Card>
+    </>
   );
 };
 
