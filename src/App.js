@@ -1,30 +1,34 @@
-import { Route, Routes, Navigate } from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
+import {LoginContext} from "./context/context";
 
-import Welcome from './pages/Welcome';
-import Products from './pages/Products';
-import ProductDetail from './pages/ProductDetail';
-import MainHeader from './components/MainHeader';
+import Layout from './components/Layout/Layout';
+import UserProfile from './components/Profile/UserProfile';
+import AuthPage from './pages/AuthPage';
+import HomePage from './pages/HomePage';
+import {useContext} from "react";
 
 function App() {
+
+  const loginCtx = useContext(LoginContext);
+
   return (
-    <div>
-      <MainHeader />
-      <main>
-        <Routes>
-          <Route path='/' element={<Navigate replace to='/welcome' />}/>
-          <Route path='/welcome/*' element={  <Welcome />}>
-            <Route path="new-user" element={<p>Welcome, new user!</p>} />
-          </Route>
-          <Route path='/products' element={<Products />}/>
-          <Route path='/products/:productId' element={<ProductDetail />}/>
-        </Routes>
-      </main>
-    </div>
+    <Layout>
+    <Switch>
+      <Route path='/' exact>
+        <HomePage/>
+      </Route>
+      {!loginCtx.isLoggedIn ? <Route path='/auth'>
+        <AuthPage/>
+      </Route> : null }
+      {loginCtx.isLoggedIn ? <Route path='/profile'>
+        <UserProfile/>
+      </Route> : null }
+      <Route path='*'>
+        <Redirect to='/'/>
+      </Route>
+    </Switch>
+  </Layout>
   );
 }
 
 export default App;
-
-// our-domain.com/welcome => Welcome Component
-// our-domain.com/products => Products Component
-// our-domain.com/product-detail/a-book
