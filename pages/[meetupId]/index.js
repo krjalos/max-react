@@ -1,9 +1,14 @@
 import MeetupDetails from "../../components/meetups/MeetupDetails";
 import {MongoClient, ObjectId} from "mongodb";
+import Head from "next/head";
 
 const MeetupPage = (props) => {
   return (
     <>
+      <Head>
+        <title>Meetup Page | {props.meetup.title}</title>
+        <meta name='description' content={`All about ${props.meetup.title}`}/>
+      </Head>
       <MeetupDetails meetup={props.meetup}/>
     </>
   )
