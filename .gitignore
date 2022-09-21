@@ -3,6 +3,8 @@
 
 /.next
 
+/.idea
+
 # dependencies
 /node_modules
 /.pnp
