@@ -61,7 +61,7 @@ export const getStaticProps = async (context) => {
         description:meetup.description
       }
     },
-    revalidate: 100
+    revalidate: 5
   }
 }
 
