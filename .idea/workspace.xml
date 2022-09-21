@@ -4,8 +4,6 @@
     <list default="true" id="740b88f4-8175-4e0b-95d3-9cbb31c2c6fd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/[meetupId]/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/[meetupId]/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/new-meetup/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/new-meetup/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +77,7 @@
       <workItem from="1663095865913" duration="20582000" />
       <workItem from="1663233297680" duration="1197000" />
       <workItem from="1663242869475" duration="16612000" />
-      <workItem from="1663593934516" duration="18154000" />
+      <workItem from="1663593934516" duration="19996000" />
     </task>
     <servers />
   </component>
