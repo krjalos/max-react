@@ -3,7 +3,7 @@ import React from 'react';
 import './Modal.css';
 
 const modal = (props) => {
-  const classes = `Modal ${props.show ? 'show' : 'hide'}`;
+  const classes = `Modal ${props.currentState}`;
 
   return (
     <div className={classes}>
