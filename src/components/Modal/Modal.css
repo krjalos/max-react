@@ -15,8 +15,11 @@
     transform:translateY(-100%);
 }
 
-.Modal.entering,
-.Modal.entered {
+.fade-slide-enter {
+    opacity:1;
+    transform:translateY(0);
+}
+.fade-slide-enter-active {
     opacity:1;
     transform:translateY(0);
 }
