@@ -1,17 +1,32 @@
+import React from "react";
 import CSSTransition from "react-transition-group/CSSTransition";
-import React, {useRef} from 'react';
 
-import './Modal.css';
+import "./Modal.css";
 
-const modal = (props) => {
-  const nodeRef = useRef();
+const animationTiming = {
+    enter: 400,
+    exit: 1000
+};
 
+const modal = props => {
   return (
-    <CSSTransition nodeRef={nodeRef} mountOnEnter unmountOnExit in={props.show} timeout={400} classNames="fade-slide">
-      <div ref={nodeRef} className="Modal">
-        <h1>A Modal</h1>
-        <button className="Button" onClick={props.closed}>Dismiss</button>
-      </div>
+    <CSSTransition 
+        mountOnEnter 
+        unmountOnExit 
+        in={props.show} 
+        timeout={animationTiming}
+        classNames={{
+            enter: '',
+            enterActive: 'ModalOpen',
+            exit: '',
+            exitActive: 'ModalClosed'
+        }}>
+          <div className="Modal">
+            <h1>A Modal</h1>
+            <button className="Button" onClick={props.closed}>
+              Dismiss
+            </button>
+          </div>
     </CSSTransition>
   );
 };
