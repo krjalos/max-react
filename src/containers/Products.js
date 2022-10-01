@@ -1,13 +1,14 @@
-import React, {useContext} from 'react';
-import {ProductContext} from "../store/product-context";
+import React from 'react';
+import useStore from '../store/store';
 
 import ProductItem from '../components/Products/ProductItem';
 import './Products.css';
 
 const Products = props => {
-  const productsCtx = useContext(ProductContext);
 
-  const productList = productsCtx.products;
+  const {globalState} = useStore();
+
+  const productList = globalState.products;
 
   return (
     <ul className="products-list">
