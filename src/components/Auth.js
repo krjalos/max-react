@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import LoginContext from "../use-context";
 
 import Card from './UI/Card';
 import './Auth.css';
 
 const Auth = props => {
-  const loginHandler = () => {};
+  const loginCtx = useContext(LoginContext);
+
+  const loginHandler = () => {
+    loginCtx.toggleLoggedIn(true);
+  };
 
   return (
     <div className="auth">

@@ -1,9 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 
 import Ingredients from './components/Ingredients/Ingredients';
+import Auth from "./components/Auth";
+import LoginContext from "./use-context";
 
 const App = props => {
-  return <Ingredients />;
+  const loginCtx = useContext(LoginContext);
+
+  return (
+    <>
+      {loginCtx.loggedIn ? <Ingredients /> : <Auth />}
+    </>
+  );
 };
 
 export default App;
