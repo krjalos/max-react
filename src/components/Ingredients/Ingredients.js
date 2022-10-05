@@ -1,61 +1,86 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useReducer, useState} from 'react';
 
 import IngredientForm from './IngredientForm';
 import Search from './Search';
 import IngredientList from "./IngredientList";
+import LoadingIndicator from "../UI/LoadingIndicator";
+import ErrorModal from "../UI/ErrorModal";
+
+const ingredientReducer = (prevState, action ) => {
+  switch(action.type) {
+    case 'SET':
+      return action.ingredients;
+    case 'ADD':
+      return [...prevState, action.ingredient];
+    case 'REMOVE':
+      return prevState.filter(i => i.id !== action.id);
+    default:
+      throw new Error("No valid action type");
+  }
+}
 
 function Ingredients() {
 
-  const [ingredients, setIngredients] = useState([]);
+  const [ingredients, dispatchIngredients] = useReducer(ingredientReducer, []);
+
   const [searchTerm, setSearchTerm] = useState("");
-  const [ingredientsLoaded, setIngredientsLoaded] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
 
   useEffect(() => {
-    const fetchIngredients = async () => {
-      const response = await fetch('https://max-react-hooks-4184d-default-rtdb.firebaseio.com/ingredients.json');
+    setLoading(true);
+    fetch('https://max-react-hooks-4184d-default-rtdb.firebaseio.com/ingredients.json').then((response) => {
+      return response.json();
+    }).then((data) => {
+      const loadedIngredients = [];
 
-      if(response.ok) {
-        const data = await response.json();
-
-        const loadedIngredients = [];
-
-        for (const key in data) {
-          loadedIngredients.push({id: key, title: data[key].title, amount: data[key].amount});
-        }
-
-        setIngredients((prevState) => [...prevState, ...loadedIngredients]);
-
-      }else {
-        return "Can't fetch ingredients from server";
+      for (const key in data) {
+        loadedIngredients.push({id: key, title: data[key].title, amount: data[key].amount});
       }
-    }
 
-    fetchIngredients();
+      dispatchIngredients({type:"SET", ingredients: loadedIngredients});
+      setLoading(false);
+    }).catch(error => {
+      setError(error.message);
+    });
 
   }, []);
 
-  const addIngredientHandler = async (ingredient) => {
-
-    const response = await fetch('https://max-react-hooks-4184d-default-rtdb.firebaseio.com/ingredients.json', {
+  const addIngredientHandler = (ingredient) => {
+    setLoading(true);
+    fetch('https://max-react-hooks-4184d-default-rtdb.firebaseio.com/ingredients.json', {
       method:"POST",
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(ingredient)
+    }).then((response) => {
+      return response.json();
+    }).then((data) => {
+      const finalIngredient = {...ingredient, id: data.name};
+
+      dispatchIngredients({type:"ADD", ingredient: finalIngredient});
+      setLoading(false);
+    }).catch(error => {
+      setError(error.message);
     });
-
-    const data = await response.json();
-
-    const finalIngredient = {...ingredient, id: data.name};
-
-    setIngredients((prevState) => [...prevState, finalIngredient]);
   }
 
   const removeIngredientHandler = (id) => {
-    setIngredients((prevState) => {
-      const newState = [...prevState];
-      return newState.filter(i => i.id !== id);
+    setLoading(true);
+    fetch(`https://max-react-hooks-4184d-default-rtdb.firebaseio.com/ingredients/${id}.json`, {
+      method:"DELETE"
+    }).then(() => {
+      dispatchIngredients({type:"REMOVE", id: id});
+      setLoading(false);
+    }).catch(error => {
+      setError(error.message);
     });
+  }
+
+  const errorCloseHandler = () => {
+    setError(null);
+    setLoading(false);
   }
 
   const searchChangedHandler = (term) => {
@@ -66,11 +91,16 @@ function Ingredients() {
 
   return (
     <div className="App">
-      <IngredientForm addIngredient={addIngredientHandler}/>
+      {error ? <ErrorModal onClose={errorCloseHandler}>{error}</ErrorModal> : null}
+
+      <IngredientForm addIngredient={addIngredientHandler} />
 
       <section>
         <Search onSearchChange={searchChangedHandler} />
-        <IngredientList ingredients={filteredList} onRemoveItem={removeIngredientHandler}/>
+        {loading ?
+          <LoadingIndicator/> :
+          <IngredientList ingredients={filteredList} onRemoveItem={removeIngredientHandler}/>
+        }
       </section>
     </div>
   );
