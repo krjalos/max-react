@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import LoginContext from "../use-context";
+import LoginContext from "../context/use-context";
 
 import Card from './UI/Card';
 import './Auth.css';

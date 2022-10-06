@@ -1,4 +1,5 @@
-import React, {useEffect, useReducer, useState} from 'react';
+import React, {useCallback, useEffect, useReducer, useState} from 'react';
+import useHttp from "../../hooks/http";
 
 import IngredientForm from './IngredientForm';
 import Search from './Search';
@@ -24,68 +25,57 @@ function Ingredients() {
   const [ingredients, dispatchIngredients] = useReducer(ingredientReducer, []);
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
+
+  const {sending, error, fetchResponse, httpRequest, resetError} = useHttp();
+
+  console.log("RENDERING");
 
   useEffect(() => {
-    setLoading(true);
-    fetch('https://max-react-hooks-4184d-default-rtdb.firebaseio.com/ingredients.json').then((response) => {
-      return response.json();
-    }).then((data) => {
-      const loadedIngredients = [];
+    if(fetchResponse.action) {
+      if(fetchResponse.action.type === "GET") {
+        const ingredientsHelper = [];
+        for(const i in fetchResponse.data) {
+          ingredientsHelper.push({ id: i, ...fetchResponse.data[i]});
+        }
 
-      for (const key in data) {
-        loadedIngredients.push({id: key, title: data[key].title, amount: data[key].amount});
+        dispatchIngredients({type: "SET", ingredients: ingredientsHelper});
       }
+      if(fetchResponse.action.type === "ADD") {
+        const finalIngredient = {...fetchResponse.action.body, id: fetchResponse.data.name};
 
-      dispatchIngredients({type:"SET", ingredients: loadedIngredients});
-      setLoading(false);
-    }).catch(error => {
-      setError(error.message);
-    });
+        dispatchIngredients({type:"ADD", ingredient: finalIngredient});
+      }
+      if(fetchResponse.action.type === "REMOVE") {
+        dispatchIngredients({type:"REMOVE", id: fetchResponse.action.id});
+      }
+    }
+
+  }, [fetchResponse]);
+
+  useEffect(() => {
+
+    httpRequest({type: "GET", url: "https://max-react-hooks-4184d-default-rtdb.firebaseio.com/ingredients.json"});
 
   }, []);
 
-  const addIngredientHandler = (ingredient) => {
-    setLoading(true);
-    fetch('https://max-react-hooks-4184d-default-rtdb.firebaseio.com/ingredients.json', {
-      method:"POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(ingredient)
-    }).then((response) => {
-      return response.json();
-    }).then((data) => {
-      const finalIngredient = {...ingredient, id: data.name};
+  const addIngredientHandler = useCallback((ingredient) => {
 
-      dispatchIngredients({type:"ADD", ingredient: finalIngredient});
-      setLoading(false);
-    }).catch(error => {
-      setError(error.message);
-    });
-  }
+    httpRequest({type: "ADD", url: "https://max-react-hooks-4184d-default-rtdb.firebaseio.com/ingredients.json", method:"POST", body: ingredient});
 
-  const removeIngredientHandler = (id) => {
-    setLoading(true);
-    fetch(`https://max-react-hooks-4184d-default-rtdb.firebaseio.com/ingredients/${id}.json`, {
-      method:"DELETE"
-    }).then(() => {
-      dispatchIngredients({type:"REMOVE", id: id});
-      setLoading(false);
-    }).catch(error => {
-      setError(error.message);
-    });
-  }
+  }, [httpRequest])
 
-  const errorCloseHandler = () => {
-    setError(null);
-    setLoading(false);
-  }
+  const removeIngredientHandler = useCallback((id) => {
 
-  const searchChangedHandler = (term) => {
+    httpRequest({type: "REMOVE", url: `https://max-react-hooks-4184d-default-rtdb.firebaseio.com/ingredients/${id}.json`, method:"DELETE", id: id});
+  }, [httpRequest])
+
+  const errorCloseHandler = useCallback(() => {
+    resetError();
+  }, [resetError])
+
+  const searchChangedHandler = useCallback((term) => {
     setSearchTerm(term);
-  }
+  }, [])
 
   const filteredList = searchTerm === "" ? ingredients : ingredients.filter(i => i.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
@@ -97,7 +87,7 @@ function Ingredients() {
 
       <section>
         <Search onSearchChange={searchChangedHandler} />
-        {loading ?
+        {sending ?
           <LoadingIndicator/> :
           <IngredientList ingredients={filteredList} onRemoveItem={removeIngredientHandler}/>
         }

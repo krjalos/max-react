@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 
 import './index.css';
 import App from './App';
-import {LoginContextProvider} from "./use-context";
+import {LoginContextProvider} from "./context/use-context";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
