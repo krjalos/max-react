@@ -1,0 +1,10 @@
+.newMeetupForm {
+  max-width:480px;
+  margin:0 auto;
+}
+
+.newMeetupForm input,
+.newMeetupForm label {
+  display:block;
+  margin:10px 0;
+}
