@@ -1,8 +1,7 @@
 import React, {useContext, useRef} from "react";
 import classes from './NewMeetupForm.module.css';
 import MeetupModel from "../../model/MeetupModel";
-import MeetupContext from "../../context/meetup-context";
-import {useNavigate} from "react-router-dom";
+import useHttp from "../../hooks/useHttp";
 
 const NewMeetupForm = () => {
 
@@ -11,9 +10,7 @@ const NewMeetupForm = () => {
   const addressRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLInputElement>(null);
 
-  const navigate = useNavigate();
-
-  const MeetupsCtx = useContext(MeetupContext);
+  const {addMeetup} = useHttp();
 
   const submitHandler = (event : React.FormEvent) => {
     event.preventDefault();
@@ -22,17 +19,21 @@ const NewMeetupForm = () => {
       return;
     }
 
-    const newMeetup = new MeetupModel({
-      id: new Date().getTime().toString(),
+    const newMeetup : {
+      title: string;
+      image: string;
+      address: string;
+      description:  string;
+      favorite: boolean;
+    } = {
       title: titleRef.current!.value,
       description: descriptionRef.current!.value,
       address: addressRef.current!.value,
-      image: imageRef.current!.value
-    });
+      image: imageRef.current!.value,
+      favorite: false
+    };
 
-    MeetupsCtx.addMeetup(newMeetup);
-
-    navigate('/');
+    addMeetup(newMeetup);
   }
 
   return (

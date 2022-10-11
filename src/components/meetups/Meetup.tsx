@@ -1,14 +1,13 @@
 import React from "react";
-import {useContext} from "react";
-import MeetupContext from "../../context/meetup-context";
 
 import MeetupModel from "../../model/MeetupModel";
 import classes from './Meetup.module.css';
 import {Link} from "react-router-dom";
+import useHttp from "../../hooks/useHttp";
 
 const Meetup:React.FC<{meetup:MeetupModel}> = (props) => {
 
-  const meetupCtx = useContext(MeetupContext);
+  const {toggleFavorite} = useHttp();
 
   return (
     <div className={classes.meetup}>
@@ -16,7 +15,7 @@ const Meetup:React.FC<{meetup:MeetupModel}> = (props) => {
       <div className={classes.contentWrapper}>
         <h2>{props.meetup.title}</h2>
         <div className={classes.controls}>
-          <button onClick={meetupCtx.toggleFavorite.bind(this, props.meetup.id)} className={classes.button}>{props.meetup.favorite ? "Un-favorite" : "Favorite"}</button>
+          <button onClick={toggleFavorite.bind(this, props.meetup.id, props.meetup.favorite)} className={classes.button}>{props.meetup.favorite ? "Un-favorite" : "Favorite"}</button>
           <Link to={`meetup/${props.meetup.id}`} className={classes.button}>Read More</Link>
         </div>
       </div>

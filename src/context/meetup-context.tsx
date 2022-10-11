@@ -6,34 +6,20 @@ const MeetupContext = React.createContext<{
   meetups: MeetupModel[];
   toggleFavorite: (id: string) => void;
   addMeetup: (meetup: MeetupModel) => void;
+  setMeetups: (meetups: MeetupModel[]) => void;
 }>({
   meetups: [],
   toggleFavorite: (id: string) => {},
-  addMeetup: (meetup: MeetupModel) => {}
+  addMeetup: (meetup: MeetupModel) => {},
+  setMeetups: (meetups: meetupModel[]) => {}
 });
 
 const MeetupContextProvider: React.FC<{ children: React.ReactNode }> = (props) => {
 
-  const [meetups, setMeetups] = useState<MeetupModel[]>([new MeetupModel({
-    id: 'm1',
-    title: 'This is a first meetup',
-    image:
-      'https://i.picsum.photos/id/1006/800/600.jpg?hmac=nwxcvq9bA1kg8dt9iFDxXrENJymxa7UAhY8G3fDa5I4',
-    address: 'Meetupstreet 5, 12345 Meetup City',
-    description:
-      'This is a first, amazing meetup which you definitely should not miss. It will be a lot of fun!',
-  }),
-    new meetupModel({
-      id: 'm2',
-      title: 'This is a second meetup',
-      image:
-        'https://i.picsum.photos/id/855/800/600.jpg?hmac=PJoSQj9I-RCHZWlkSyqGtW38F5T2D1j5rT342kMVKKU',
-      address: 'Meetupstreet 5, 12345 Meetup City',
-      description:
-        'This is a first, amazing meetup which you definitely should not miss. It will be a lot of fun!',
-    })]);
+  const [meetups, setMeetups] = useState<MeetupModel[]>([]);
 
   const toggleFavoriteHandler = (id: string) => {
+
     setMeetups((prevState) => prevState.map(meetup => meetup.id === id ? {
       ...meetup,
       favorite: !meetup.favorite
@@ -41,11 +27,25 @@ const MeetupContextProvider: React.FC<{ children: React.ReactNode }> = (props) =
   }
 
   const addMeetupHandler = (meetup: MeetupModel) => {
-    setMeetups((prevState) => [...prevState, meetup]);
+    setMeetups((prevState) => [...prevState, new meetupModel(meetup)]);
+  }
+
+  const setMeetupHandler = (meetups: MeetupModel[]) => {
+    const meetupHelper = [];
+
+    for(const id in meetups) {
+      meetupHelper.push({...meetups[id], id: id});
+    }
+    setMeetups(meetupHelper);
   }
 
   return <MeetupContext.Provider
-    value={{meetups: meetups, toggleFavorite: toggleFavoriteHandler, addMeetup: addMeetupHandler}}>
+    value={{
+      meetups: meetups,
+      toggleFavorite: toggleFavoriteHandler,
+      addMeetup: addMeetupHandler,
+      setMeetups: setMeetupHandler
+  }}>
     {props.children}
   </MeetupContext.Provider>
 }

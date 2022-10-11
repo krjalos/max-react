@@ -5,7 +5,7 @@ import Meetups from "../components/meetups/Meetups";
 
 const AllMeetups = () => {
   const meetupsCtx = useContext(MeetupContext);
-
+  console.log(meetupsCtx.meetups)
   return (
     <Meetups meetups={meetupsCtx.meetups}/>
   );
